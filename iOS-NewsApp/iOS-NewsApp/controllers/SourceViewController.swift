@@ -12,7 +12,6 @@ class SourceViewController: UITableViewController {
     
     var sources: [SourceItem] = []
     
-    //TODO: Insert proper strings into API variables for URLComponent properties)
     private let urlScheme = "https"
     private let baseURLString = "newsapi.org/v1"
     private let sourcesEndpoint = "/sources"
@@ -61,7 +60,6 @@ class SourceViewController: UITableViewController {
             
             self.processSourcesFetchRequest(data: data, error: error)
         })
-        //TODO: Start dataTask here...
         task.resume()
     }
 
@@ -80,24 +78,16 @@ class SourceViewController: UITableViewController {
     func decodeSourceItems(fromJSON data: Data) {
 
         do {
-            
-            //TODO: JSONDecode JSON data object
-            
-            //Method 1: Likely be too obscure for students to discover
-//            let sourcesDataArray = try JSONDecoder().decode(Response.self, from: data).sources
-            
-            //Method 2: More linear and step-by-step; likely easier to work out solution...
             let decodedResponseObject = try JSONDecoder().decode(Response.self, from: data)
             let sourcesDataArray = decodedResponseObject.sources
             
-            //TODO: Return to the main queue to (a) populate self.sources array, then (b) display  results in the table view...
             DispatchQueue.main.async {
                 self.sources = sourcesDataArray!
                 self.tableView?.reloadData()
             }
         } catch let jsonError {
             
-            //TODO: if JSONDecoder fails, catch and present error
+            //if JSONDecoder fails, catch and present error
             print("error trying to convert data to JSON")
             print(jsonError)
         }
