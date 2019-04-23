@@ -10,6 +10,7 @@ import UIKit
 
 class SourceViewController: UITableViewController {
     
+    //TODO: Using MVVM, refactor this datasource array 
     var sources: [SourceItem] = []
     
     private let urlScheme = "https"
